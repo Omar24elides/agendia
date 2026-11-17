@@ -1,0 +1,26 @@
+/* 9. CALENDARIO ---------------------------------------------------------------
+   Estados: lib (libre) · res (reservada) · occ (bloqueo) · off (no se trabaja)  */
+.seg{display:flex;gap:4px;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:4px;margin-bottom:12px}
+.seg button{flex:1;background:none;color:var(--mu);padding:8px}.seg button.on{background:var(--ac);color:var(--acf)}
+.cnav{display:flex;justify-content:space-between;align-items:center;text-align:center;margin-bottom:12px}.cnav a{color:var(--ac);font-size:13px}
+.leg{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--mu);margin:0 0 12px}
+.leg i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.lib{background:var(--lib)} .res{background:var(--res);color:var(--resf)} .occ{background:var(--occ);color:var(--occf)} .off{background:var(--off);color:var(--mu)}
+.hr{display:grid;grid-template-columns:48px minmax(0,1fr);gap:8px;align-items:center;margin:4px 0}
+.sl{padding:8px 12px;border-radius:10px;font-size:14px;cursor:pointer}.sl.off{cursor:default}.sl.lib{color:var(--mu);border:1px dashed var(--bd);background:none}
+.wg{display:grid;grid-template-columns:54px repeat(var(--n),minmax(0,1fr));gap:3px;align-items:center}
+.hh{font-size:10px;white-space:nowrap;text-align:left}.dl{font-size:13px;cursor:pointer}.dl.td{color:var(--ac)}
+.c{display:block;height:24px;border-radius:4px;cursor:pointer}
+.mg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}.mg .hh{text-align:center;font-size:12px}
+.mc{border-radius:10px;padding:6px 2px;text-align:center;cursor:pointer;border:1px solid transparent;min-height:50px}
+.mc b{display:block}.mc.td{border-color:var(--ac)}
+.ct{color:var(--ac);font-weight:700;font-size:13px}.mc.occ .ct{color:inherit}
+.yg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.yc{background:var(--in);border:1px solid var(--bd);border-radius:12px;padding:14px 12px;cursor:pointer}
+
+/* 10. GRÁFICAS --------------------------------------------------------------
+   Altura limitada: antes las barras se estiraban sin control.                */
+.ch{display:block;width:100%;height:auto;max-height:200px;margin:0 auto}
+.ch text{fill:var(--mu);font-size:10px}
+.hb{display:grid;grid-template-columns:minmax(80px,38%) minmax(0,1fr) 40px;gap:8px;align-items:center;margin:6px 0;font-size:13px}
+.hb div{height:12px;background:var(--in);border-radius:9px;overflow:hidden}.hb i{display:block;height:100%;background:var(--c2);border-radius:9px}.hb b{text-align:right}

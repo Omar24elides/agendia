@@ -1,0 +1,26 @@
+/* ==========================================================================
+   AGENDIA · styles.css
+   REGLAS: 1) no escribir estilos dentro de app.js ni index.html.
+           2) los colores salen SIEMPRE de las variables de la sección 1.
+           3) filas y formularios usan CSS grid con minmax(0,1fr): evita que
+              un texto largo desalinee botones o desborde ventanas.
+   ========================================================================== */
+
+/* 1. COLORES --------------------------------------------------------------
+   Claro  = Raava (pasteles; el azul grisáceo se oscurece para dar contraste a botones)
+   Oscuro = grafito + los mismos pasteles Raava                                 */
+:root{
+  --bg:#F0F2F5; --card:#fff; --in:#F3F8F9; --bd:#D8E3E8;          /* superficies */
+  --fg:#1F2A30; --mu:#5E7482;                                      /* texto */
+  --ac:#3F7389; --acf:#fff;                                        /* acento y su texto */
+  --hd:#C5E5E2; --hdf:#1F2A30;                                     /* encabezado */
+  --c1:#A9CDE2; --c2:#BCE3D1;                                      /* gráficas */
+  --ok:#BCE3D1; --okf:#1d4a36; --inf:#A9CDE2; --inff:#17384a;      /* etiquetas de estado */
+  --bad:#F2D8E3; --badf:#6b2a45; --pen:#E7EAA8; --penf:#4d4f10;
+  --lib:#CFEBDD; --res:#3F7389; --resf:#fff; --occ:#F2D8E3; --occf:#6b2a45; --off:#E3E8EB; /* calendario */
+}
+html[data-t=dark]{
+  --bg:#1C1E21; --card:#26292D; --in:#1F2226; --bd:#363B40;
+  --fg:#EAF1F3; --mu:#A3B5BE; --ac:#A9CDE2; --acf:#14262F; --hd:#223238; --hdf:#C5E5E2;
+  --lib:#2F4B45; --res:#A9CDE2; --resf:#14262F; --occ:#7A4C60; --occf:#F2D8E3; --off:#1F2226;
+}

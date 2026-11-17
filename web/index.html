@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Agendia</title>
+<script>let t;try{t=localStorage.getItem("t")}catch(e){}document.documentElement.dataset.t=t||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")</script>
+<link rel="stylesheet" href="css/tokens.css"><link rel="stylesheet" href="css/base.css"><link rel="stylesheet" href="css/views.css"><link rel="stylesheet" href="css/components.css"><link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<div id="app"></div><dialog id="dlg"></dialog><dialog id="cfm"></dialog><div id="toast"></div>
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="js/core/state.js"></script>
+<script src="js/core/logger.js"></script>
+<script src="js/services/schedule.js"></script>
+<script src="js/core/ui.js"></script>
+<script src="js/core/boot.js"></script>
+<script src="js/views/acceso.js"></script>
+<script src="js/core/render.js"></script>
+<script src="js/views/calendario.js"></script>
+<script src="js/views/clientas.js"></script>
+<script src="js/views/paquetes.js"></script>
+<script src="js/views/programar.js"></script>
+<script src="js/views/servicios.js"></script>
+<script src="js/views/caja.js"></script>
+<script src="js/views/resumen.js"></script>
+<script src="js/views/horario.js"></script>
+<script src="js/views/registro.js"></script>
+<script src="js/core/start.js"></script>
+</body>
+</html>

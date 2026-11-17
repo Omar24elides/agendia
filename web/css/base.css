@@ -1,0 +1,79 @@
+/* 2. BASE ----------------------------------------------------------------- */
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 system-ui,sans-serif;padding-bottom:76px}
+h1{font-size:18px;margin:0} h2{font-size:17px;margin:0}
+h3{font-size:13px;margin:16px 0 6px;color:var(--mu);text-transform:uppercase;letter-spacing:.04em}
+main{max-width:900px;margin:0 auto;padding:16px}
+.mu{color:var(--mu);font-size:13px}
+header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--hd);color:var(--hdf)}
+
+/* 3. MENÚ: abajo en el teléfono, arriba en escritorio ------------------------
+   La pestaña activa (.on) se rellena con el color de acento.                  */
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;gap:2px;padding:4px 4px env(safe-area-inset-bottom);overflow-x:auto;
+    background:var(--card);border-top:1px solid var(--bd);z-index:5}
+nav button{flex:1 0 62px;background:none;color:var(--mu);border-radius:12px;padding:6px 2px;font-size:11px;
+    display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button span{font-size:19px}
+nav button.on{background:var(--ac);color:var(--acf);font-weight:600}
+@media(min-width:760px){
+  body{padding:0}
+  nav{position:static;max-width:900px;margin:12px auto 0;padding:0 16px;border:0;background:none;gap:6px;overflow:visible}
+  nav button{flex:0 0 auto;flex-direction:row;font-size:14px;gap:6px;border:1px solid var(--bd);border-radius:10px;padding:8px 14px;background:var(--card)}
+  nav button.on{border-color:var(--ac)}
+}
+
+/* 4. BOTONES Y CAMPOS ----------------------------------------------------- */
+button,.btn{background:var(--ac);color:var(--acf);border:0;border-radius:10px;padding:9px 14px;cursor:pointer;font:inherit;text-decoration:none;display:inline-block}
+button.ghost,.btn.ghost{background:none;color:var(--ac);border:1px solid var(--ac)}
+header button.ghost{color:var(--hdf);border-color:currentColor}
+.sm{padding:5px 10px;font-size:13px}
+input,select,textarea{font:inherit;padding:9px;border:1px solid var(--bd);border-radius:10px;background:var(--in);color:var(--fg);max-width:100%;min-width:0}
+select{text-overflow:ellipsis}
+textarea{resize:vertical}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+input[type=number]{-moz-appearance:textfield}
+label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--mu)}
+label input,label select,label textarea{font-size:15px}
+.chk{flex-direction:row;align-items:center;gap:8px;color:var(--fg)}
+
+/* 5. TARJETAS Y FILAS ------------------------------------------------------
+   .row = texto flexible (izquierda) + acciones (derecha). En móvil, apiladas.  */
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:12px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 14px;align-items:center;padding:10px 0;border-bottom:1px solid var(--bd);overflow-wrap:anywhere}
+.row:last-child{border:0}
+.row>.btns:last-child{justify-content:flex-end}
+@media(max-width:600px){.row{grid-template-columns:minmax(0,1fr)}.row>.btns:last-child{justify-content:flex-start}}
+.btns{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.closed{opacity:.75}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.grid .card{margin:0}
+.kpi b{display:block;font-size:26px}
+.av{width:38px;height:38px;border-radius:50%;background:var(--c1);display:grid;place-items:center;font-weight:700;color:#1F2A30;flex:none}
+.bar{height:6px;border-radius:9px;background:var(--in);overflow:hidden;width:120px;max-width:100%}.bar i{display:block;height:100%;background:var(--c2)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.chips .pill{cursor:pointer}
+
+/* 6. ETIQUETAS DE ESTADO ---------------------------------------------------- */
+.pill{padding:2px 9px;border-radius:99px;background:var(--in);font-size:12px;white-space:nowrap}
+.confirmed,.completed{background:var(--ok);color:var(--okf)}
+.pending{background:var(--pen);color:var(--penf)}
+.cancelled,.no_show{background:var(--bad);color:var(--badf)}
+.info{background:var(--inf);color:var(--inff)}
+
+/* 7. FORMULARIOS Y VENTANAS (dialog) ----------------------------------------
+   Todo campo ocupa el 100% de su columna; nada se sale de la ventana.         */
+.f{display:grid;gap:10px}
+.f2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.f>*,.f2>*{min-width:0}
+.f input,.f select,.f textarea{width:100%}
+.f .chk input{width:auto}
+dialog{border:1px solid var(--bd);border-radius:16px;background:var(--card);color:var(--fg);padding:16px;width:min(520px,94vw);max-height:92vh;overflow-y:auto;overflow-x:hidden}
+dialog::backdrop{background:rgba(0,0,0,.55)}
+.mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.x{background:none;color:var(--mu);padding:2px 8px;font-size:18px}
+@media(max-width:600px){dialog{margin:auto 0 0;width:100%;max-width:100%;border-radius:16px 16px 0 0}.f2{grid-template-columns:minmax(0,1fr)}}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:90px;z-index:20;display:grid;gap:6px}
+#toast div{background:var(--fg);color:var(--bg);padding:9px 16px;border-radius:99px;font-size:14px}
+
+/* 8. ACCESO ------------------------------------------------------------------ */
+.login{max-width:340px;margin:12vh auto;text-align:center;padding:0 16px}.login input{width:100%;margin-bottom:8px}
+.hrs{display:grid;grid-template-columns:110px minmax(0,1fr);gap:6px 10px;align-items:center}

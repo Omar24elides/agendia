@@ -1,0 +1,10 @@
+/* 15. TODAS LAS PANTALLAS ----------------------------------------------------
+   Táctil: objetivos de 44px. Teclado: foco visible. Movimiento reducido: sin animaciones.
+   Pantallas grandes: más ancho. Teléfono horizontal: menú compacto.            */
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+@media(pointer:coarse){button,.btn,input,select{min-height:44px}.sm{min-height:40px}.x{min-width:40px}input[type=checkbox]{min-height:0;width:22px;height:22px}}
+@media(min-width:1200px){main,nav{max-width:1100px}}
+@media(max-height:480px){nav button span{display:none}}
+@media(max-width:360px){main{padding:12px}.pk-m b{font-size:13px}}
+dialog{max-height:92dvh}
+@media(prefers-reduced-motion:reduce){.sk,button.busy::after{animation:none}*{transition:none!important;scroll-behavior:auto!important}}
