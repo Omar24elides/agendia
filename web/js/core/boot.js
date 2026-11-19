@@ -17,15 +17,22 @@ async function init() {
   if (e2) return fail(e2.message);
   T = t; await load(); render();
 }
+let WIN_START = null;   // inicio de la ventana cargada para citas y bloqueos
 async function load() {
-  const since = new Date(new Date().getFullYear() - 1, 0, 1).toISOString();
+  const now = new Date();
+  // Ventana ágil por defecto (90 días atrás) para red móvil; si se navega más atrás, ensureWindow() carga bajo demanda
+  WIN_START = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 90);
+  const sinceWin = WIN_START.toISOString();
+  const sincePay = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 180).toISOString();
+
   const r = await Promise.all([
-    sb.from("clients").select("*").order("created_at", {ascending:false}),
+    sb.from("clients").select("id,name,phone,zone,source,marketing_consent,loyalty_stamps,notes,created_at").order("created_at", {ascending:false}).limit(500),
     sb.from("services").select("*").order("sort"),
-    sb.from("appointments").select("*").gte("starts_at", since).order("starts_at"),
-    sb.from("blocks").select("*").gte("ends_at", since).order("starts_at"),
-    sb.from("client_packages").select("*").order("purchased_at", {ascending:false}),
-    sb.from("payments").select("*").gte("paid_at", since).order("paid_at", {ascending:false})]);
+    sb.from("appointments").select("*").gte("starts_at", sinceWin).order("starts_at"),
+    sb.from("blocks").select("*").gte("ends_at", sinceWin).order("starts_at"),
+    sb.from("client_packages").select("*").order("purchased_at", {ascending:false}).limit(300),
+    sb.from("payments").select("*").gte("paid_at", sincePay).order("paid_at", {ascending:false}).limit(500)]);
   const bad = r.find(x => x.error); if (bad) { toast("No se pudieron cargar datos: " + bad.error.message, 1); log("system", "error", "load.failed", bad.error.message); }
-  D = {c:r[0].data||[], s:r[1].data||[], a:r[2].data||[], b:r[3].data||[], p:r[4].data||[], pay:r[5].data||[]};
+  D = {c:r[0].data||[], s:r[1].data||[], a:r[2].data||[], b:r[3].data||[], p:r[4].data||[], pay:r[5].data||[], st:[]};
+  D.st = await EquipoService.load();   // equipo aparte: si la migración 007 no está aplicada, queda vacío y todo sigue igual
 }

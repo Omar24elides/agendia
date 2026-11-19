@@ -3,7 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#3F7389">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>Agendia</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
 <script>let t;try{t=localStorage.getItem("t")}catch(e){}document.documentElement.dataset.t=t||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")</script>
 <link rel="stylesheet" href="css/tokens.css"><link rel="stylesheet" href="css/base.css"><link rel="stylesheet" href="css/views.css"><link rel="stylesheet" href="css/components.css"><link rel="stylesheet" href="css/responsive.css">
 </head>
@@ -12,9 +18,18 @@
 <script src="config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script src="js/core/state.js"></script>
+<script src="js/core/vocab.js"></script>
 <script src="js/core/logger.js"></script>
-<script src="js/services/schedule.js"></script>
 <script src="js/core/ui.js"></script>
+<script src="js/services/schedule.js"></script>
+<script src="js/services/ajustes.js"></script>
+<script src="js/services/equipo.js"></script>
+<script src="js/services/clientas.js"></script>
+<script src="js/services/caja.js"></script>
+<script src="js/services/paquetes.js"></script>
+<script src="js/services/citas.js"></script>
+<script src="js/services/catalogo.js"></script>
+<script src="js/services/backup.js"></script>
 <script src="js/core/boot.js"></script>
 <script src="js/views/acceso.js"></script>
 <script src="js/core/render.js"></script>
@@ -25,6 +40,7 @@
 <script src="js/views/servicios.js"></script>
 <script src="js/views/caja.js"></script>
 <script src="js/views/resumen.js"></script>
+<script src="js/views/equipo.js"></script>
 <script src="js/views/horario.js"></script>
 <script src="js/views/registro.js"></script>
 <script src="js/core/start.js"></script>

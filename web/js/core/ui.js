@@ -13,11 +13,7 @@ document.addEventListener("input", e => {
   const t = e.target, k = t.dataset && t.dataset.num; if (!k) return;
   t.value = k === "int" ? t.value.replace(/\D/g, "") : t.value.replace(",", ".").replace(/[^0-9.]/g, "").replace(/(\..*)\./g, "$1").replace(/(\.\d{2}).*/, "$1");
 });
-const setSt = (id, st) => {
-  const a = D.a.find(x => x.id === id);
-  if (st === "completed" && new Date(a.starts_at) > new Date()) return toast("No puedes completar una cita futura", 1);
-  run(sb.from("appointments").update({ status: st }).eq("id", id), "Cita actualizada");
-};
+const setSt = (id, st) => CitasService.setStatus(id, st);
 
 /* ---- carga, confirmaciones y estados (etapa 2 de diseño) ---- */
 const ST = {pending: "Pendiente", confirmed: "Confirmada", completed: "Completada", cancelled: "Cancelada", no_show: "No asistió"};
@@ -28,7 +24,7 @@ const ask = (msg, ok = "Continuar") => new Promise(res => {
   cfm.innerHTML = `<p style="margin:0 0 14px">${esc(msg)}</p><div class="btns" style="justify-content:flex-end"><button class="ghost" id="cfn">Cancelar</button><button id="cfy">${ok}</button></div>`;
   cfm.showModal(); $("#cfy").onclick = () => { cfm.close(); res(true); }; $("#cfn").onclick = () => { cfm.close(); res(false); }; cfm.oncancel = () => res(false);
 });
-async function delPay(id) { if (await ask("¿Anular este pago? Quedará fuera de la caja.", "Anular")) run(sb.from("payments").delete().eq("id", id), "Pago anulado"); }
+async function delPay(id) { return CajaService.cancel(id); }
 const stampsHtml = (n, t) => `<div class="stamps" title="${n} de ${t}">${[...Array(t)].map((_, i) => `<i class="st ${i < n ? "on" : ""}"></i>`).join("")}</div>`;
 let RUNNING = false;   // evita guardar dos veces si se pulsa dos veces
 async function run(p, msg) {
@@ -37,6 +33,10 @@ async function run(p, msg) {
     const { error } = await p; logRun(p, error, performance.now() - t0, msg);
     if (error) { toast(/exclusion|overlap/i.test(error.message) ? "Ese horario ya está ocupado" : error.message, 1); return false; }
     if (dlg.open) dlg.close();
-    await load(); render(); toast(msg || "Guardado"); return true;
+    await load();
+    // Si la vista activa usa paginación en servidor, refresca su página actual
+    if (tab === "clientas" && typeof refreshClientas === "function") await refreshClientas(true);
+    if (tab === "caja" && typeof refreshCaja === "function") await refreshCaja(true);
+    render(); toast(msg || "Guardado"); return true;
   } finally { RUNNING = false; unbusy(); }
 }

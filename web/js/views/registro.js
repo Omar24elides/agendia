@@ -7,11 +7,8 @@
 /* ---- vista Registro (solo dueña): últimos 200 eventos con filtros ---- */
 let LOGS = null; const LOGF = {service: "", level: ""};
 async function loadLogs() {
-  let q = sb.from("logs").select("*").order("created_at", {ascending: false}).limit(200);
-  if (LOGF.service) q = q.eq("service", LOGF.service);
-  if (LOGF.level) q = q.eq("level", LOGF.level);
-  const { data, error } = await q; LOGS = error ? [] : data;
-  if (error) toast(error.message, 1); render();
+  LOGS = await BackupService.listLogs(LOGF);
+  render();
 }
 function vRegistro() {
   if (LOGS === null) loadLogs();

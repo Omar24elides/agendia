@@ -1,0 +1,18 @@
+{
+  "name": "Agendia · Gestión de Citas y Caja",
+  "short_name": "Agendia",
+  "description": "CRM de citas, paquetes, equipo y caja multimoneda.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F0F2F5",
+  "theme_color": "#3F7389",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -24,11 +24,11 @@ function vResumen() {
   const today = now.toISOString().slice(0, 10), in30 = new Date(+now + 30 * 864e5).toISOString().slice(0, 10);
   const exp = D.p.filter(p => p.expires_at && p.expires_at >= today && p.expires_at <= in30 && p.sessions_used < p.sessions_total);
   const k = (n, l) => `<div class="card kpi"><b>${n}</b><span class="mu">${l}</span></div>`;
-  return `<div class="top"><h2>Resumen</h2></div><div class="grid">${k(D.c.filter(c => inM(c.created_at)).length, "clientas nuevas este mes")}${k(done, "sesiones este mes")}
+  return `<div class="top"><h2>Resumen</h2></div><div class="grid">${k(D.c.filter(c => inM(c.created_at)).length, V().cs + " " + V().nuevas + " este mes")}${k(done, "sesiones este mes")}
     ${k(money(income) + " " + cur(), "ventas de paquetes este mes")}${k(D.c.filter(c => c.loyalty_stamps >= T.loyalty_target).length, "regalos por entregar")}</div>
   <h3>Ventas de paquetes por mes (${cur()})</h3><div class="card">${vbars(months, money)}</div>
   <h3>Sesiones realizadas por semana (fecha = lunes de esa semana)</h3><div class="card">${vbars(weeks)}</div>
   <h3>Servicios más agendados</h3><div class="card">${hbars(topN(D.a.filter(a => a.status !== "cancelled").map(a => sn(a.service_id))))}</div>
-  <h3>¿De dónde llegan las clientas?</h3><div class="card">${hbars(topN(D.c.map(c => c.source || "sin dato")))}</div>
+  <h3>¿De dónde llegan tus ${V().cs}?</h3><div class="card">${hbars(topN(D.c.map(c => c.source || "sin dato")))}</div>
   <h3>Paquetes por vencer (30 días)</h3><div class="card">${exp.map(p => `<div class="row"><span>${esc(cn(p.client_id))} · ${esc(sn(p.service_id))}</span><span class="mu">vence ${p.expires_at} · quedan ${p.sessions_total - p.sessions_used}</span></div>`).join("") || empty("Ninguno.")}</div>`;
 }

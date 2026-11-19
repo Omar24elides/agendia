@@ -6,9 +6,22 @@
    ================================================================== */
 /* ---- registro de actividad por servicio ---- */
 /* Servicios conocidos (espejo de la tabla log_services). Para agregar uno: ver docs/REGISTROS.md */
-const LOG_SERVICES = {auth: "Ingreso y sesiones", clients: "Clientas", appointments: "Citas y calendario", packages: "Paquetes y sesiones", payments: "Pagos y caja", catalog: "Servicios y precios", schedule: "Horario y bloqueos", whatsapp: "Bot de WhatsApp", backup: "Copias y exportación", system: "Errores generales"};
-/* Tabla de la base de datos -> servicio al que pertenece (lo usa logRun) */
-const TABLE_SERVICE = {appointments: "appointments", clients: "clients", client_packages: "packages", payments: "payments", services: "catalog", blocks: "schedule", tenants: "schedule"};
+const LOG_SERVICES = {auth: "Ingreso y sesiones", clients: "Clientas", appointments: "Citas y calendario", packages: "Paquetes y sesiones", payments: "Pagos y caja", catalog: "Servicios y precios", schedule: "Horario y bloqueos", staff: "Equipo y profesionales", booking: "Reservas en línea", whatsapp: "Bot de WhatsApp", backup: "Copias y exportación", system: "Errores generales"};
+/* Tabla o RPC de la base de datos -> servicio al que pertenece (lo usa logRun) */
+const TABLE_SERVICE = {
+  appointments: "appointments",
+  clients: "clients",
+  redeem_loyalty_reward: "clients",
+  search_clients_page: "clients",
+  client_packages: "packages",
+  cancel_package: "packages",
+  payments: "payments",
+  get_caja_summary: "payments",
+  services: "catalog",
+  blocks: "schedule",
+  tenants: "schedule",
+  staff: "staff"
+};
 let REQ = null, LOG_N = 0, LOG_T = Date.now();
 /** Nueva acción del usuario: todos los eventos que la sigan comparten este id. */
 const newReq = () => (REQ = crypto.randomUUID());
